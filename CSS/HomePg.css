@@ -1,0 +1,361 @@
+
+/*
+* {
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.logo{
+    position:absolute;
+    top:30px;
+    z-index:2px;
+    left:100px;
+    font-size: 2em;
+    font-weight: 700;
+    
+}
+.home-img{
+   position:absolute;
+    bottom:0;
+    right:0px;
+    
+    height:110%;
+}
+
+.navigation{
+    display:none;
+}*/
+:root{
+    --primary-color:red; /*we can now add 'var(--primary-color)' in place of red (not did here, sayng helps in defining the theme of the site)*/
+}
+ * {
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+html, body{
+    font-family: Arial, Helvetica, sans-serif;
+    color:#111;
+}
+
+
+.logo {
+    position:absolute;
+    top:30px;
+    left:100px;
+    font-size:2rem;
+    font-weight: 700;
+    z-index:20;
+}
+.home-img{
+    position: absolute;
+    bottom:0; right:0;
+    height: 100%;
+}
+section {
+    display:flex;
+    flex-direction: column; /*added for servives.html to display services vertically bbut orientation of home.html also gets changed bcz of that so added a class in section tag*/
+    height:100vh;
+    align-items: center;
+    padding:100px;
+    margin-top:60px; /*present only in services*/
+}
+section.home{
+    flex-direction: row;
+    margin-top:0px;
+}
+.home-content{
+    position:relative;
+    z-index:10;
+    max-width:600px;
+}
+h1{
+    font-size:30px;
+    font-weight:500;
+}
+p{
+    margin: 20px 0px 10px;
+    font-size:1.1rem;    
+}
+.btn{
+    cursor: pointer;
+    display:inline-block;
+    background-color: #f60f20;
+    color:white;
+    text-decoration: none;
+    padding:10px 30px;
+    margin:20px 0px; /*doesn't work 'cause links are by default displayed inline(worked afte making it displayed as inline-block)*/
+}
+.btn:hover{
+    transform: scale(0.98);
+}
+
+.toggle{
+    position:fixed;
+    top:0; right:0;
+    width:60px; height:60px;
+    z-index:20;
+    background-color:red;
+    background: url(../Images/menu.jpg);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index:20;
+    
+}
+.overlay{
+    position:fixed;
+    top:0; right:0;
+    width:60px; height:60px;
+    z-index:20;
+    background-color: red;
+    mix-blend-mode:lighten;
+    pointer-events: none;  /* 🔑 Alternative 2, set pointer/click events to none means, No click blocking, Clicks pass through to toggle */
+    z-index:19; /*🔑 Alternative 1, bro it blocked my toggle to get clicked bcz of same index or even higher*/
+}
+.toggle.active{
+    background: url(../Images/close.jpg);
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.navigation{
+    position:fixed; 
+    top:0;
+    left:100%;  /*Connection1, when inactive hides*/
+    width:100%; /*how header width-height is defined now?*/
+    height:100%;
+    background: white;
+    z-index:15;   /*how did it not made the other lower items down?*/
+    display:flex;  /*bcz the 'position:fixed' made it stay fixed on items.*/
+    justify-content: center; /*and if u remove that statement, it makes the other items i.e. the section move down to make desired alignments */
+    align-items: center;
+}
+.navigation.active{
+    left:0;           /*Connection1, when active takes screen*/
+}
+.navigation ul{
+    position:relative; /*so that the elements inside can be set with position:absolute*/
+}
+.navigation ul li{
+    position:relative;
+    list-style: none;
+    text-align: center ;
+}
+.navigation ul li a{
+    font-size:2.2rem;
+    text-decoration: none;
+    color:black;
+    font-weight: 300;
+}
+.navigation ul li a:hover{
+    color:red;
+}
+.navigation .social-bar{
+    position:absolute;
+    left:0; top:0;
+    width:60px;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.navigation .Email{
+    position: absolute;
+    bottom: 20px;
+    transform: scale(0.5);
+}
+.navigation .social-bar a{
+    display: inline-block;
+    transform: scale(0.5);
+}
+/*SERVICES PAGE*/
+.services{
+    margin-top:40px;
+    display:grid; /*not gonna make it look, need other commands(more)*/
+    grid-template-columns: repeat(3, 1fr) ;/* says repeat 3 times fr(fraction that is now 0.33). determines How wide each column should be and how many do you want*/
+    gap: 40px;
+    text-align: center;
+}
+.services .service {
+    padding:30px;
+}
+.services .service:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /*transparency*/
+}
+.services .service h2{
+    font-size:24px;
+    font-weight: 500;
+    margin-top: 20px;
+    color: #1b206e;
+}
+.services .service .icon img{
+    max-width:100px;
+}
+/*WORK PAGE*/
+.portfolio{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center ; /*just like media query for responsiveness*/
+}
+.portfolio .item{
+    position: relative; /*bcz gonna give hover effect to 'a launch' where 'a' is relative in item. */
+    height: 300px; 
+    width: 300px;
+    margin: 5px;
+}
+.portfolio .item img{
+    width: 100%; /*100% of container item. */
+    height: 100%l
+}
+.portfolio .item .action {
+    position: absolute;
+    top: 0; left:0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.5s;
+}
+.portfolio .item .action a{
+    display:inline-block;
+    color: white;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 5px 15px;
+}
+.portfolio .item:hover .action{
+    opacity: 1;
+}
+/*CONTACT*/
+.contact{
+    position:relative;
+    width:100%; /*wrt what?*/
+    margin-top:50px;
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.contact-form{
+    position:relative;
+    background:#f9f9f9;
+    width: calc(100% - 400px); /*?*/
+    padding: 60px 40px 20px;
+}
+.contact-form form{
+    width: 100%;
+}
+.contact-form .row{
+    width: 100%;
+    display: flex;
+}
+.contact-form .input50{
+    width: 50%;     /*?*/
+    margin: 0px 10px;
+}
+.contact-form .input100{
+    width: 100%;
+    margin: 0px 10px;
+}
+.contact-form .row input, .contact-form .row textarea {
+    position: relative; /*what items are relative to it?*/
+    border: 1px solid rgba(0,0,0,0.2);
+    color: #111;
+    background: transparent;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 10px 0;
+    resize: none;
+}
+.contact-form .row textarea{
+    height: 150px;
+}
+.contact-form .row input[type='submit']{
+    background-color: #1b206e;
+    color: white;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 300;
+    border: 0;
+    cursor: pointer;
+}
+.contact-info{
+    width: 350px;
+    background: #f9f9f9;
+    padding: 60px 40px 20px;
+}
+.contact-info .info-box{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+.contact-info .info-box .contact-icon{
+    width: 20px;
+    margin-right: 40px;
+}
+.contact-info .info-box .details h4{
+     color: #1b206e; /*Secondary color*/
+}
+.contact-info .info-box .details p, .contact-info .info-box .details a{
+    color: #111; /*color of links*/
+}
+
+@media (max-width: 1068px ) {
+    .home-img{      /*background red is visible bcz we removed the image but how?*/
+        display:none;
+    }
+    .logo {
+        top: 10px;
+        left: 40px;
+        font-size: 1.5rem; 
+    }
+    section{
+        padding: 100px 40px;
+    }
+    .navigation ul li a{
+        font-size: 2rem;
+    } 
+    /*SERVICES*/
+    .services{
+        /*rest grid statements were applied*/
+        grid-template-columns: repeat(2, 1fr) ;
+    }
+    /*CONTACT*/
+    .contact {
+        flex-direction: column;
+    }
+    .contact-form{
+        width:100%;
+        padding: 30px 30px 20px;
+    }
+    .contact-form .row{
+        flex-direction: column;
+    }
+    .contact-form .input50, .contact-form .input100{
+        width: 100%;
+        margin: 0;
+    }
+    .contact-info {
+        width: 100%;
+        margin-top: 20px;
+        padding: 30px 30px 20px;
+    }
+}
+@media (max-width: 768px){
+    .services{
+        /*rest grid statements were applied already*/
+        grid-template-columns: 1fr ; /*for only 1, this can be used*/
+    }
+    .services .service {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /*transparency*/
+    }
+}
